@@ -1,0 +1,34 @@
+{
+  "name": "cql-to-library",
+  "version": "0.1.0",
+  "description": "Utility functionality to take in a CQL file(s), translate those to ELM, and output as a FHIR Library including the Base64 encoded values for the CQL and the resulting ELM",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/cli/cli.js",
+    "lint": "eslint \"./**/*.js\"",
+    "lint-fix": "eslint \"./**/*.js\" --fix",
+    "test": "cross-env LOGGING=none jest",
+    "test:watch": "cross-env LOGGING=none jest --watchAll"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "commander": "^6.2.0",
+    "cql-translation-service-client": "0.6.1",
+    "crypto": "1.0.1",
+    "fhirpath": "3.0.0",
+    "winston": "^3.2.1",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.14",
+    "cross-env": "^7.0.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^26.6.3",
+    "jest-when": "^2.7.0",
+    "nock": "^11.7.0",
+    "rewire": "^5.0.0"
+  }
+}
