@@ -5,7 +5,7 @@ function getCqlFiles(input) {
   const cqlFiles = [];
   if (fs.lstatSync(input).isDirectory()) {
     const files = fs.readdirSync(input);
-    files.forEach((f) => {
+    files.forEach(f => {
       const name = `${input}/${f}`;
       cqlFiles.push(fs.readFileSync(name));
     });
@@ -32,5 +32,6 @@ ${JSON.stringify(testELM.lib_2)}
 }
 
 module.exports = {
-  getCqlFiles, getTestResponse,
+  getCqlFiles,
+  getTestResponse
 };
