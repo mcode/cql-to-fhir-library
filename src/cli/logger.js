@@ -1,7 +1,9 @@
 const { loggers, format, transports } = require('winston');
 
 const LOGGER_NAME = 'cli';
-const logFormat = format.printf(({ level, message, timestamp }) => (`${timestamp} [${level}]: ${message}`));
+const logFormat = format.printf(
+  ({ level, message, timestamp }) => `${timestamp} [${level}]: ${message}`
+);
 
 if (!loggers.has(LOGGER_NAME)) {
   loggers.add(LOGGER_NAME, {
@@ -10,13 +12,13 @@ if (!loggers.has(LOGGER_NAME)) {
       format.colorize(),
       format.timestamp({ format: 'HH:mm:ss.SS' }),
       format.align(),
-      logFormat,
+      logFormat
     ),
     transports: [
       new transports.Console({
-        silent: process.env.LOGGING === 'none',
-      }),
-    ],
+        silent: process.env.LOGGING === 'none'
+      })
+    ]
   });
 }
 

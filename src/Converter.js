@@ -15,10 +15,11 @@ class Converter {
 
   convertToFHIR(cqlLibraries = {}, elms = {}) {
     const fhirLibraries = {};
-    Object.keys(cqlLibraries).forEach((key) => {
+    Object.keys(cqlLibraries).forEach(key => {
       const cql = cqlLibraries[key];
       const elm = elms[key];
-      fhirLibraries[`${elm.library.identifier.id}_${elm.library.identifier.version}`] = this.libraryTemplate(cql, elm);
+      fhirLibraries[`${elm.library.identifier.id}_${elm.library.identifier.version}`] =
+        this.libraryTemplate(cql, elm);
     });
     return fhirLibraries;
   }
@@ -42,65 +43,72 @@ class Converter {
   }
 
   libraryTemplate(cql, elm) {
-    if (!cql || !elm) { return false; }
+    if (!cql || !elm) {
+      return false;
+    }
     // const id = crypto.randomUUID();
 
-    const relatedArtifacts = [{
-      type: 'documentation',
-      url: 'https://github.com/cqframework/clinical_quality_language/wiki/FHIRHelpers',
-      document: {
+    const relatedArtifacts = [
+      {
+        type: 'documentation',
         url: 'https://github.com/cqframework/clinical_quality_language/wiki/FHIRHelpers',
+        document: {
+          url: 'https://github.com/cqframework/clinical_quality_language/wiki/FHIRHelpers'
+        }
       },
-    },
-    {
-      type: 'depends-on',
-      resource: 'http://hl7.org/fhir/Library/FHIR-ModelInfo',
-    },
+      {
+        type: 'depends-on',
+        resource: 'http://hl7.org/fhir/Library/FHIR-ModelInfo'
+      }
     ];
 
     // look at the elm file for includes and pull in the
     // libraries that this one depends on
     if (elm.library.includes && elm.library.includes.def) {
-      elm.library.includes.def.forEach((include) => {
-        relatedArtifacts.push(
-          {
-            type: 'depends-on',
-            resource: include.path,
-          },
-        );
+      elm.library.includes.def.forEach(include => {
+        relatedArtifacts.push({
+          type: 'depends-on',
+          resource: include.path
+        });
       });
     }
     return {
       resourceType: 'Library',
       id: elm.library.identifier.id,
       url: '',
-      identifier: [{
-        use: 'official',
-        value: 'FHIRHelpers',
-      }],
+      identifier: [
+        {
+          use: 'official',
+          value: 'FHIRHelpers'
+        }
+      ],
       version: elm.library.identifier.version,
       name: elm.library.identifier.id,
       title: elm.library.identifier.id,
       status: 'active',
       experimental: false,
       type: {
-        coding: [{
-          code: 'logic-library',
-        }],
+        coding: [
+          {
+            code: 'logic-library'
+          }
+        ]
       },
       relatedArtifact: relatedArtifacts,
-      content: [{
-        contentType: 'text/cql',
-        data: Buffer.from(cql.cql).toString('base64'),
-      },
-      {
-        contentType: 'application/elm+json',
-        data: Buffer.from(JSON.stringify(elm)).toString('base64'),
-      }],
+      content: [
+        {
+          contentType: 'text/cql',
+          data: Buffer.from(cql.cql).toString('base64')
+        },
+        {
+          contentType: 'application/elm+json',
+          data: Buffer.from(JSON.stringify(elm)).toString('base64')
+        }
+      ]
     };
   }
 }
 
 module.exports = {
-  Converter,
+  Converter
 };

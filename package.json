@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node src/cli/cli.js",
     "lint": "eslint \"./**/*.js\"",
-    "lint-fix": "eslint \"./**/*.js\" --fix",
+    "lint:fix": "eslint \"./**/*.js\" --fix",
     "test": "cross-env LOGGING=none jest",
-    "test:watch": "cross-env LOGGING=none jest --watchAll"
+    "test:watch": "cross-env LOGGING=none jest --watchAll",
+    "prettier": "prettier --check \"**/*.{js,ts}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,ts}\""
   },
   "author": "",
   "license": "Apache-2.0",
@@ -23,12 +25,14 @@
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "cross-env": "^7.0.0",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.18.2",
     "jest": "^26.6.3",
     "jest-when": "^2.7.0",
     "nock": "^11.7.0",
-    "rewire": "^5.0.0"
+    "rewire": "^5.0.0",
+    "prettier" :"2.7.1"
+    
   }
 }

@@ -25,7 +25,7 @@ function getCqlFiles() {
   const cqlFiles = [];
   if (fs.lstatSync(file).isDirectory()) {
     const files = fs.readdirSync(file);
-    files.forEach((f) => {
+    files.forEach(f => {
       const name = `${file}/${f}`;
       cqlFiles.push(fs.readFileSync(name));
     });
@@ -50,7 +50,7 @@ async function runApp() {
 
     const libraries = await converter.convert(cqlFiles);
     // For each bundle in our extractedData, write it to our output directory
-    Object.keys(libraries).forEach((key) => {
+    Object.keys(libraries).forEach(key => {
       const lib = libraries[key];
       const outputFile = path.join(output, `${lib.title}.json`);
       logger.info(`Writting resource to  ${outputFile}`);
