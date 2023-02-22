@@ -12,7 +12,7 @@ class Converter {
 
     // error case with too few cqlLibraries
     if (Object.keys(cqlLibraries).length < 1) {
-      console.warn("too feww CQL Libraries: " + String(Object.keys(cqlLibraries).length));
+      console.warn('too feww CQL Libraries: ' + String(Object.keys(cqlLibraries).length));
       return {};
     }
 
@@ -33,7 +33,7 @@ class Converter {
 
     // error case with too few cqlLibraries
     if (Object.keys(cqlLibraries).length < 1) {
-      console.warn("too feww CQL Libraries: " + String(Object.keys(cqlLibraries).length));
+      console.warn('too feww CQL Libraries: ' + String(Object.keys(cqlLibraries).length));
       return {};
     }
 
@@ -45,7 +45,6 @@ class Converter {
     // update the CQL/ELM in the provided FHIR Library
     return this.updateFHIRLibrary(fhirLibrary, cqlLibraries[key], elms[key], id);
   }
-
 
   // Treat all sumbissions as multiple cql files to make life easier
   convertArrayToObject(_cql) {
@@ -72,15 +71,15 @@ class Converter {
     }
 
     library.content = [
-        {
-          contentType: 'text/cql',
-          data: Buffer.from(cql.cql).toString('base64')
-        },
-        {
-          contentType: 'application/elm+json',
-          data: Buffer.from(JSON.stringify(elm)).toString('base64')
-        }
-      ];
+      {
+        contentType: 'text/cql',
+        data: Buffer.from(cql.cql).toString('base64')
+      },
+      {
+        contentType: 'application/elm+json',
+        data: Buffer.from(JSON.stringify(elm)).toString('base64')
+      }
+    ];
 
     return library;
   }

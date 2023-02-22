@@ -59,7 +59,7 @@ function getLibraryFile() {
   } catch (e) {
     throw new Error('Library file ${lib} does not exist');
   }
-  return fs.readFileSync(lib, {encoding:'utf8', flag:'r'});
+  return fs.readFileSync(lib, { encoding: 'utf8', flag: 'r' });
 }
 
 async function runApp() {
@@ -76,7 +76,7 @@ async function runApp() {
     }
 
     if (lib) {
-      var libraryFile = getLibraryFile()
+      var libraryFile = getLibraryFile();
       const fhirLibrary = await converter.convertWithLib(cqlFiles, libraryFile, id);
 
       // strip the folder off of the file path
@@ -85,8 +85,7 @@ async function runApp() {
       // save the file
       logger.info(`Writing resource to  ${outputFile}`);
       fs.writeFileSync(outputFile, JSON.stringify(fhirLibrary, null, 2), 'utf8');
-
-    }  else {
+    } else {
       const fhirLibraries = await converter.convert(cqlFiles, id);
       // For each bundle in our extractedData, write it to our output directory
       Object.keys(fhirLibraries).forEach(key => {
@@ -96,7 +95,6 @@ async function runApp() {
         fs.writeFileSync(outputFile, JSON.stringify(lib, null, 2), 'utf8');
       });
     }
-
   } catch (e) {
     logger.error(e.message);
     logger.error(e.stack);
