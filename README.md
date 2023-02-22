@@ -33,6 +33,7 @@ The cql parameter to the convert method may be of one of the following types:
  }}`
 
 ### Command line 
+```
 Usage: cli [options]
 
 Options:
@@ -43,7 +44,7 @@ Options:
   -l, --lib <path>     Specify the library to embed the CQL/ELM
   -d, --depends <path> Path to the CQL dependency files
   -h, --help           display help for command
-
+```
 
 Example usage: 
 
