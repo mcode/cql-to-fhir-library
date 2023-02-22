@@ -38,7 +38,10 @@ Usage: cli [options]
 Options:
   -f --file <path>     Path to cql file to translate
   -o, --output <path>  Output directory for generated resources (default: "output")
-  -u --url <url>       Specify url to cql-translation-service: (default: "http://localhost:3000")
+  -u, --url <url>      Specify url to cql-translation-service: (default: "http://localhost:3000")
+  -i, --id <id>        Specify the id of the output fhir library (default: cql library name or id of specified library)
+  -l, --lib <path>     Specify the library to embed the CQL/ELM
+  -d, --depends <path> Path to the CQL dependency files
   -h, --help           display help for command
 
 
