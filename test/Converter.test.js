@@ -55,7 +55,7 @@ describe('Converter', () => {
       Promise.resolve({ headers: { 'content-type': testHeader }, data: getTestResponse() })
     );
 
-    const id = "test_id";
+    const id = 'test_id';
     const converter = new Converter('http://localhost');
     const cqlData = getCqlFiles(`${__dirname}/fixtures/cql`);
     const fhirLibraries = await converter.convert(cqlData, id);
@@ -76,7 +76,7 @@ describe('Converter', () => {
     expect(
       fhirpath.evaluate(lib, "Library.content.where(contentType='application/elm+json').data")[0]
     ).toBeDefined();
-  })
+  });
 
   test('Should be able to convert cql to FHIR library with provided library to insert cql', async () => {
     // setup mocked out requests
@@ -88,16 +88,22 @@ describe('Converter', () => {
     const id = undefined;
     const converter = new Converter('http://localhost');
     const cqlData = getCqlFiles(`${__dirname}/fixtures/cql`);
-    const libFileName = "Library-ChlamydiaScreening_Common.json";
+    const libFileName = 'Library-ChlamydiaScreening_Common.json';
     const fhirLibFile = getLibraryFile(`${__dirname}/fixtures/fhir/${libFileName}`);
     const fhirLibrary = JSON.parse(fhirLibFile);
     const lib = await converter.convertWithLib(cqlData, fhirLibFile, id);
 
     const key = Object.keys(testELM)[0];
     expect(lib).toBeDefined();
-    expect(fhirpath.evaluate(lib, 'Library.id')[0]).toEqual(fhirpath.evaluate(fhirLibrary, 'Library.id')[0]);
-    expect(fhirpath.evaluate(lib, 'Library.version')[0]).toEqual(fhirpath.evaluate(fhirLibrary, 'Library.version')[0]);
-    expect(fhirpath.evaluate(lib, 'Library.title')[0]).toEqual(fhirpath.evaluate(fhirLibrary, 'Library.title')[0]);
+    expect(fhirpath.evaluate(lib, 'Library.id')[0]).toEqual(
+      fhirpath.evaluate(fhirLibrary, 'Library.id')[0]
+    );
+    expect(fhirpath.evaluate(lib, 'Library.version')[0]).toEqual(
+      fhirpath.evaluate(fhirLibrary, 'Library.version')[0]
+    );
+    expect(fhirpath.evaluate(lib, 'Library.title')[0]).toEqual(
+      fhirpath.evaluate(fhirLibrary, 'Library.title')[0]
+    );
     expect(
       fhirpath.evaluate(lib, "Library.content.where(contentType='text/cql').data")[0]
     ).toBeDefined();
@@ -113,10 +119,10 @@ describe('Converter', () => {
       Promise.resolve({ headers: { 'content-type': testHeader }, data: getTestResponse() })
     );
 
-    const id = "test_id";
+    const id = 'test_id';
     const converter = new Converter('http://localhost');
     const cqlData = getCqlFiles(`${__dirname}/fixtures/cql`);
-    const libFileName = "Library-ChlamydiaScreening_Common.json";
+    const libFileName = 'Library-ChlamydiaScreening_Common.json';
     const fhirLibFile = getLibraryFile(`${__dirname}/fixtures/fhir/${libFileName}`);
     const fhirLibrary = JSON.parse(fhirLibFile);
     const lib = await converter.convertWithLib(cqlData, fhirLibFile, id);
@@ -124,8 +130,12 @@ describe('Converter', () => {
     const key = Object.keys(testELM)[0];
     expect(lib).toBeDefined();
     expect(fhirpath.evaluate(lib, 'Library.id')[0]).toEqual(id);
-    expect(fhirpath.evaluate(lib, 'Library.version')[0]).toEqual(fhirpath.evaluate(fhirLibrary, 'Library.version')[0]);
-    expect(fhirpath.evaluate(lib, 'Library.title')[0]).toEqual(fhirpath.evaluate(fhirLibrary, 'Library.title')[0]);
+    expect(fhirpath.evaluate(lib, 'Library.version')[0]).toEqual(
+      fhirpath.evaluate(fhirLibrary, 'Library.version')[0]
+    );
+    expect(fhirpath.evaluate(lib, 'Library.title')[0]).toEqual(
+      fhirpath.evaluate(fhirLibrary, 'Library.title')[0]
+    );
     expect(
       fhirpath.evaluate(lib, "Library.content.where(contentType='text/cql').data")[0]
     ).toBeDefined();
