@@ -17,9 +17,7 @@ program
   .option('-d --depends <path>', 'Path to the CQL dependency files.')
   .parse(process.argv);
 
-const {
-  file, output, url, id, lib, depends
- } = program;
+const { file, output, url, id, lib, depends } = program;
 
 function getCqlFiles() {
   try {

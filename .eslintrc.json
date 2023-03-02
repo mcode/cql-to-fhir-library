@@ -9,6 +9,7 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "plugins": ["prettier"],
     "extends": [
         "prettier"
       ],
@@ -23,7 +24,7 @@
         "no-console": "off",
         "max-len": ["error", { "code": 200 }],
         "object-curly-newline": ["error", {
-            "ObjectPattern": { "minProperties": 5 }
+            "ObjectPattern": { "minProperties": 10 }
         }],
         "no-underscore-dangle":  ["error", { "allow": ["__get__", "__set__"] }]
     }
