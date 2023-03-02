@@ -15,6 +15,15 @@ function getCqlFiles(input) {
   return cqlFiles;
 }
 
+function getLibraryFile(lib) {
+  try {
+    fs.lstatSync(lib);
+  } catch (e) {
+    throw new Error('Library file ${lib} does not exist');
+  }
+  return fs.readFileSync(lib, { encoding: 'utf8', flag: 'r' });
+}
+
 function getTestResponse() {
   return `--Boundary_1
 content-type: application/elm+json
@@ -33,5 +42,6 @@ ${JSON.stringify(testELM.lib_2)}
 
 module.exports = {
   getCqlFiles,
+  getLibraryFile,
   getTestResponse
 };
