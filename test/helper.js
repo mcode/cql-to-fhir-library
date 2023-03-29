@@ -5,7 +5,7 @@ function getCqlFiles(input) {
   const cqlFiles = [];
   if (fs.lstatSync(input).isDirectory()) {
     const files = fs.readdirSync(input);
-    files.forEach((f) => {
+    files.forEach(f => {
       const name = `${input}/${f}`;
       cqlFiles.push(fs.readFileSync(name));
     });
@@ -13,6 +13,15 @@ function getCqlFiles(input) {
     cqlFiles.push(fs.readFileSync(input));
   }
   return cqlFiles;
+}
+
+function getLibraryFile(lib) {
+  try {
+    fs.lstatSync(lib);
+  } catch (e) {
+    throw new Error('Library file ${lib} does not exist');
+  }
+  return fs.readFileSync(lib, { encoding: 'utf8', flag: 'r' });
 }
 
 function getTestResponse() {
@@ -32,5 +41,7 @@ ${JSON.stringify(testELM.lib_2)}
 }
 
 module.exports = {
-  getCqlFiles, getTestResponse,
+  getCqlFiles,
+  getLibraryFile,
+  getTestResponse
 };
