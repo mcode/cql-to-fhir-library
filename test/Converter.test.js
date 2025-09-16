@@ -4,9 +4,17 @@ const { Converter } = require('../src/Converter');
 const { getCqlFiles, getLibraryFile, getTestResponse } = require('./helper');
 const testELM = require('./fixtures/elm/elms.json');
 
-jest.mock('axios');
+jest.mock('axios', () => ({
+  post: jest.fn()
+}));
+
+const mockedAxios = jest.mocked(axios);
 
 describe('Converter', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('Should be able to convert cql arrary to CqlLibraries object', () => {
     const converter = new Converter('');
     const cqlData = getCqlFiles(`${__dirname}/fixtures/cql`);
@@ -21,9 +29,10 @@ describe('Converter', () => {
   test('Should be able to convert cql to FHIR library', async () => {
     // setup mocked out requests
     const testHeader = 'multipart/form-data;boundary=Boundary_1';
-    axios.post.mockImplementation(() =>
-      Promise.resolve({ headers: { 'content-type': testHeader }, data: getTestResponse() })
-    );
+    mockedAxios.post.mockResolvedValue({
+      headers: { 'content-type': testHeader },
+      data: getTestResponse()
+    });
 
     const id = undefined;
     const converter = new Converter('http://localhost');
@@ -51,9 +60,10 @@ describe('Converter', () => {
   test('Should be able to convert cql to FHIR library with provided id', async () => {
     // setup mocked out requests
     const testHeader = 'multipart/form-data;boundary=Boundary_1';
-    axios.post.mockImplementation(() =>
-      Promise.resolve({ headers: { 'content-type': testHeader }, data: getTestResponse() })
-    );
+    mockedAxios.post.mockResolvedValue({
+      headers: { 'content-type': testHeader },
+      data: getTestResponse()
+    });
 
     const id = 'test_id';
     const converter = new Converter('http://localhost');
@@ -81,9 +91,10 @@ describe('Converter', () => {
   test('Should be able to convert cql to FHIR library with provided library to insert cql', async () => {
     // setup mocked out requests
     const testHeader = 'multipart/form-data;boundary=Boundary_1';
-    axios.post.mockImplementation(() =>
-      Promise.resolve({ headers: { 'content-type': testHeader }, data: getTestResponse() })
-    );
+    mockedAxios.post.mockResolvedValue({
+      headers: { 'content-type': testHeader },
+      data: getTestResponse()
+    });
 
     const id = undefined;
     const converter = new Converter('http://localhost');
@@ -115,9 +126,10 @@ describe('Converter', () => {
   test('Should be able to convert cql to FHIR library with provided library to insert cql with provided id', async () => {
     // setup mocked out requests
     const testHeader = 'multipart/form-data;boundary=Boundary_1';
-    axios.post.mockImplementation(() =>
-      Promise.resolve({ headers: { 'content-type': testHeader }, data: getTestResponse() })
-    );
+    mockedAxios.post.mockResolvedValue({
+      headers: { 'content-type': testHeader },
+      data: getTestResponse()
+    });
 
     const id = 'test_id';
     const converter = new Converter('http://localhost');
